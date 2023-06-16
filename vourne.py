@@ -12,7 +12,7 @@ from selenium.webdriver.common.alert import Alert
 import time
 import csv
 
-
+#Webdriver setup
 chrome_driver_path = "C:\\proj\\chromedriver.exe"
 service = Service(executable_path=chrome_driver_path)
 driver = webdriver.Chrome(service=service)
@@ -21,12 +21,15 @@ driver = webdriver.Chrome(service=service)
 def login(driver):
     try:
         driver.get("http://10.118.249.228:5002/login.html")
+        #Finding username and password fields
         username_field = driver.find_element(By.ID, "User_Name")
         password_field = driver.find_element(By.ID, "Password")
         username_field.send_keys("natasha.lasrado@dell.com")
         password_field.send_keys("3487405@Dell")
+        #page loading time
         time.sleep(3)
         submit_button = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='Cust_name']")))
+        
         try:
             submit_button.click()
             time.sleep(3)
@@ -48,6 +51,7 @@ def login(driver):
 
 def Customer_details(driver):
     try:
+        #Finding and storing the elements
         cust_name_field = driver.find_element(By.ID, "Cust_name")
         op_name_field = driver.find_element(By.ID, "Op_name")
         cust_name1_field = driver.find_element(By.ID, "Cust_name1")
@@ -76,7 +80,9 @@ def Customer_details(driver):
 
 def configurator(driver):
     try:
+        #looks for the iframe element is present or not
         iframe = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//iframe[@src='./index.html']")))
+        #switch the driver to iframe
         driver.switch_to.frame(iframe)
         configurator_element = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Configurator')]")))
         configurator_element.click()
@@ -160,7 +166,7 @@ def consolidate(driver, filename):
                 submit_button3.click()
                 time.sleep(10)
         
-        # Write consolidated data to a CSV file
+        #Writing the data to a CSV file
         with open(filename, 'w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=consolidated_data[0].keys())
             writer.writeheader()
@@ -206,7 +212,7 @@ def saved_business(driver):
         driver.quit()
 
 
-# Execute the functions
+# Executes the functions
 #login(driver)
 #configurator(driver)
 #technology(driver)
