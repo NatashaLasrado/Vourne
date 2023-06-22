@@ -62,7 +62,7 @@ def Customer_details(driver):
 
         dropdown = driver.find_element(By.ID, "Cust_name")
         select = Select(dropdown)
-        select.select_by_value("Vanguard")
+        select.select_by_value("ROM")
 
         time.sleep(2)
         op_name1_field.send_keys("ABC")
@@ -216,6 +216,6 @@ def saved_business(driver):
 #login(driver)
 #configurator(driver)
 #technology(driver)
-#consolidate(driver)
+#consolidate(driver, "consolidated_data.csv")
 #summary(driver)
 #saved_business(driver)

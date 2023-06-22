@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 from vourne import login, configurator, technology, consolidate, summary, saved_business
 from colorama import init, Fore, Style
+ 
 
 
 class VourneTesting(unittest.TestCase):
@@ -24,51 +25,55 @@ class VourneTesting(unittest.TestCase):
     def test_login(self):
         print("\nLogin Test Running......")
         result = login(self.driver)
-        self.assertTrue(result)
+        
         if result:
             self.print_passed("Login Test Result: PASSED")
         else:
             self.print_failed("Login Test Result: FAILED")
+        self.assertTrue(result)   
         print("_________________________________________________________________________")
 
     def test_configurator(self):
         print("\nConfigurator Test Running......")
         result = configurator(self.driver)
-        self.assertTrue(result)
+        
         if result:
             self.print_passed("Configurator Test Result: PASSED")
         else:
             self.print_failed("Configurator Test Result: FAILED")
+        self.assertTrue(result)
         print("_________________________________________________________________________")
 
     def test_technology(self):
         print("\nTechnology Test Running......")
         result = technology(self.driver)
-        self.assertTrue(result)
+        
         if result:
             self.print_passed("Technology Test Result: PASSED")
         else:
             self.print_failed("Technology Test Result: FAILED")
+        self.assertTrue(result)
         print("_________________________________________________________________________")
 
     def test_consolidate(self):
         print("\nConsolidate Test Running......")
         result = consolidate(self.driver, "consolidated_data.csv")
-        self.assertTrue(result)
+        
         if result:
             self.print_passed("Consolidate Test Result: PASSED")
         else:
             self.print_failed("Consolidate Test Result: FAILED")
+        self.assertTrue(result)
         print("_________________________________________________________________________")
 
     def test_summary(self):
         print("\nSummary Test Running......")
         result = summary(self.driver)
-        self.assertTrue(result)
         if result:
             self.print_passed("Summary Test Result: PASSED")
         else:
             self.print_failed("Summary Test Result: FAILED")
+        self.assertTrue(result)
         print("_________________________________________________________________________")
 
     def test_saved_business(self):
@@ -79,6 +84,7 @@ class VourneTesting(unittest.TestCase):
             self.print_passed("Saved Business Test Result: PASSED")
         else:
             self.print_failed("Saved Business Test Result: FAILED")
+        self.assertTrue(result)
         print("_________________________________________________________________________")
 
 
@@ -93,4 +99,5 @@ if __name__ == '__main__':
     suite.addTest(VourneTesting('test_saved_business'))
 
     runner = unittest.TextTestRunner()
+    runner = unittest.TextTestRunner(failfast=True)
     runner.run(suite)
